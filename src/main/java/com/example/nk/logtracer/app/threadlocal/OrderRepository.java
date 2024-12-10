@@ -1,7 +1,7 @@
-package com.example.nk.logtracer.app;
+package com.example.nk.logtracer.app.threadlocal;
 
-import com.example.nk.logtracer.trace.TraceStatus;
-import com.example.nk.logtracer.trace.logtrace.LogTrace;
+import com.example.nk.logtracer.threadlocal.TraceStatus;
+import com.example.nk.logtracer.threadlocal.logtrace.LogTrace;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;

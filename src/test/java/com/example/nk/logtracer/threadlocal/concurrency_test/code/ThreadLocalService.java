@@ -1,20 +1,18 @@
-package com.example.nk.logtracer.trace.threadlocal.code;
+package com.example.nk.logtracer.threadlocal.concurrency_test.code;
 
-import jakarta.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ThreadLocalService {
-    private ThreadLocal<String> nameStore = new ThreadLocal<>();
+    private final ThreadLocal<String> nameStore = new ThreadLocal<>();
 
-    public @Nullable String logic(String name) {
+    public void logic(String name) {
         log.info("조회 name={} -> nameStore={}", name, nameStore.get());
 
         nameStore.set(name);
         sleep(1000);
 
         log.info("조회 nameStore={}", nameStore.get());
-        return nameStore.get();
     }
 
     private void sleep(int millis) {

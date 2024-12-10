@@ -1,42 +1,49 @@
-package com.example.nk.logtracer.trace.prototype;
+package com.example.nk.logtracer.threadlocal.logtrace;
 
-import com.example.nk.logtracer.trace.TraceId;
-import com.example.nk.logtracer.trace.TraceStatus;
+import com.example.nk.logtracer.threadlocal.TraceId;
+import com.example.nk.logtracer.threadlocal.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
-public class TraceV1 {
+public class LogTraceImpl implements LogTrace {
     private static final String START_PREFIX = "--->";
     private static final String COMPLETE_PREFIX = "<--";
     private static final String EX_PREFIX = "<X-";
 
+    private final ThreadLocal<TraceId> traceIdHolder = new ThreadLocal<>(); // traceId 동기화, 동시성 이슈 발생 -> 해결을 위해 ThreadLocal 사용하여, 각 thread마다의 별도의 저장공간을 가지게 한다.
+
+
+    @Override
     public TraceStatus begin(String message) {
-        TraceId traceId = new TraceId();
+        syncTraceId();
+        TraceId traceId = traceIdHolder.get();
         Long startTimeMs = System.currentTimeMillis();
+
 
         log.info("[{}] {}{}", traceId.getId(), addSpace(START_PREFIX, traceId.getLevel()), message);
 
         return new TraceStatus(traceId, startTimeMs, message);
     }
 
-    public TraceStatus beginSync(TraceId beforeTraceId, String message) {
-        TraceId nextId = beforeTraceId.createNextId();
-        Long startTimeMs = System.currentTimeMillis();
+    private void syncTraceId() {
+        TraceId traceId = traceIdHolder.get();
 
-        log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel()), message);
-
-        return new TraceStatus(nextId, startTimeMs, message);
+        if(traceId == null) {
+            traceIdHolder.set(new TraceId());
+        } else {
+            traceIdHolder.set(traceId.createNextId());
+        }
     }
 
-
+    @Override
     public void end(TraceStatus status) {
         complete(status, null);
     }
 
+    @Override
     public void exception(TraceStatus status, Exception exception) {
         complete(status, exception);
+
     }
 
     private void complete(TraceStatus status, Exception exception) {
@@ -49,6 +56,18 @@ public class TraceV1 {
             log.info("[{}] {}{} time={}ms", traceId.getId(), addSpace(COMPLETE_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs);
         } else {
             log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), addSpace(EX_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs, exception.toString());
+        }
+        
+        releaseTraceId();
+    }
+
+    private void releaseTraceId() {
+        TraceId traceId = traceIdHolder.get();
+
+        if( traceId.isFirstLevel() ) {
+            traceIdHolder .remove();
+        } else {
+            traceIdHolder.set(traceId.createPreviousId()); // level 하나씩 줄이기
         }
     }
 

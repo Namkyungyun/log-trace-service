@@ -1,16 +1,16 @@
-package com.example.nk.logtracer.trace.logtrace;
+package com.example.nk.logtracer.threadlocal.logtrace;
 
-import com.example.nk.logtracer.trace.TraceStatus;
+import com.example.nk.logtracer.threadlocal.TraceStatus;
 import org.junit.jupiter.api.Test;
 
-class ThreadLocalLogTraceTest {
-    LogTrace logTrace = new ThreadLocalLogTrace();
+class LogTraceImplTest {
+    LogTrace logTrace = new LogTraceImpl();
 
     @Test
     public void begin_end() {
-        TraceStatus status0 =  logTrace.begin("ThreadLocalLogTrace level0");
-        TraceStatus status1 =  logTrace.begin("ThreadLocalLogTrace level1");
-        TraceStatus status2 =  logTrace.begin("ThreadLocalLogTrace level2");
+        TraceStatus status0 =  logTrace.begin("LogTraceImpl level0");
+        TraceStatus status1 =  logTrace.begin("LogTraceImpl level1");
+        TraceStatus status2 =  logTrace.begin("LogTraceImpl level2");
 
         logTrace.end(status2);
         logTrace.end(status1);
@@ -20,9 +20,9 @@ class ThreadLocalLogTraceTest {
     @Test
     public void begin_exception() {
         Runnable runnable1 = () -> {
-            TraceStatus status0 =  logTrace.begin("ThreadLocalLogTrace level0");
-            TraceStatus status1 =  logTrace.begin("ThreadLocalLogTrace level1");
-            TraceStatus status2 =  logTrace.begin("ThreadLocalLogTrace level2");
+            TraceStatus status0 =  logTrace.begin("LogTraceImpl level0");
+            TraceStatus status1 =  logTrace.begin("LogTraceImpl level1");
+            TraceStatus status2 =  logTrace.begin("LogTraceImpl level2");
 
             logTrace.exception(status2, new RuntimeException());
             logTrace.exception(status1, new IllegalStateException());
@@ -30,9 +30,9 @@ class ThreadLocalLogTraceTest {
         };
 
         Runnable runnable2 = () -> {
-            TraceStatus status0 =  logTrace.begin("ThreadLocalLogTrace level0");
-            TraceStatus status1 =  logTrace.begin("ThreadLocalLogTrace level1");
-            TraceStatus status2 =  logTrace.begin("ThreadLocalLogTrace level2");
+            TraceStatus status0 =  logTrace.begin("LogTraceImpl level0");
+            TraceStatus status1 =  logTrace.begin("LogTraceImpl level1");
+            TraceStatus status2 =  logTrace.begin("LogTraceImpl level2");
 
             logTrace.exception(status2, new RuntimeException());
             logTrace.exception(status1, new IllegalStateException());

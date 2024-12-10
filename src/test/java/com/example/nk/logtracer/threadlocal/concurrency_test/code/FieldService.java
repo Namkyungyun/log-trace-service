@@ -1,11 +1,11 @@
-package com.example.nk.logtracer.trace.threadlocal.code;
+package com.example.nk.logtracer.threadlocal.concurrency_test.code;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class FieldService {
 
-    private String nameStore;
+    private String nameStore; // 동시성이 발생하는 케이스
 
     public String logic(String name) {
         log.info("조회 name={} -> nameStore={}", name, nameStore);

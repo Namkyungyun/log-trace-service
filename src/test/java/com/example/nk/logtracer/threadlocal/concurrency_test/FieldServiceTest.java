@@ -1,23 +1,24 @@
-package com.example.nk.logtracer.trace.threadlocal;
+package com.example.nk.logtracer.threadlocal.concurrency_test;
 
-import com.example.nk.logtracer.trace.threadlocal.code.ThreadLocalService;
+import com.example.nk.logtracer.threadlocal.concurrency_test.code.FieldService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class ThreadLocalServiceTest {
-    final private ThreadLocalService threadLocalService = new ThreadLocalService();
+public class FieldServiceTest {
+
+    private FieldService fieldService = new FieldService();
 
     @Test
     void field() {
         log.info("main start");
 
         Runnable userA = () -> {
-          threadLocalService.logic("userA");
+            fieldService.logic("userA");
         };
 
         Runnable userB = () -> {
-          threadLocalService.logic("userB");
+            fieldService.logic("userB");
         };
 
         Thread threadA = new Thread(userA);
@@ -27,10 +28,13 @@ public class ThreadLocalServiceTest {
         threadB.setName("thread B");
 
         threadA.start();
+//        sleep(2000); // 동시성 문제 발생 X
+        sleep(100); // 동시성 문제 발생 O -> 이를 해결하기 위해 ThreadLocal 사용이 필요
+
         threadB.start();
 
-        sleep(2000);
-        log.info("main exit");
+        sleep(2000); // 메인 종료 늦추기
+        log.info("main exist");
     }
 
     private void sleep(int millis) {

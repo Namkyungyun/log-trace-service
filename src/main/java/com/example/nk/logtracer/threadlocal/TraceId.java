@@ -1,4 +1,4 @@
-package com.example.nk.logtracer.trace;
+package com.example.nk.logtracer.threadlocal;
 import lombok.Getter;
 import java.util.UUID;
 

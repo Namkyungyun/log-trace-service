@@ -1,6 +1,6 @@
-package com.example.nk.logtracer.trace.logtrace;
+package com.example.nk.logtracer.threadlocal.logtrace;
 
-import com.example.nk.logtracer.trace.TraceStatus;
+import com.example.nk.logtracer.threadlocal.TraceStatus;
 
 public interface LogTrace {
     TraceStatus begin(String message);
