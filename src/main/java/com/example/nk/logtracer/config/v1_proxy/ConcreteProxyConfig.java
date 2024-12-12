@@ -1,11 +1,11 @@
-package com.example.nk.logtracer.config.v2_proxy;
+package com.example.nk.logtracer.config.v1_proxy;
 
 import com.example.nk.logtracer.app.proxy.v2.ProxyOrderControllerV2;
 import com.example.nk.logtracer.app.proxy.v2.ProxyOrderRepositoryV2;
 import com.example.nk.logtracer.app.proxy.v2.ProxyOrderServiceV2;
-import com.example.nk.logtracer.config.v2_proxy.concrete_proxy.OrderControllerConcreteProxy;
-import com.example.nk.logtracer.config.v2_proxy.concrete_proxy.OrderRepositoryConcreteProxy;
-import com.example.nk.logtracer.config.v2_proxy.concrete_proxy.OrderServiceConcreteProxy;
+import com.example.nk.logtracer.config.v1_proxy.concrete_proxy.OrderControllerConcreteProxy;
+import com.example.nk.logtracer.config.v1_proxy.concrete_proxy.OrderRepositoryConcreteProxy;
+import com.example.nk.logtracer.config.v1_proxy.concrete_proxy.OrderServiceConcreteProxy;
 import com.example.nk.logtracer.threadlocal.logtrace.LogTrace;
 import com.example.nk.logtracer.threadlocal.logtrace.LogTraceImpl;
 import org.springframework.context.annotation.Bean;

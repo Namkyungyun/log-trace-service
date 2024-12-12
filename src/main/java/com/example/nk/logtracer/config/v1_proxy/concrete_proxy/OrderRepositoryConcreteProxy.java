@@ -1,4 +1,4 @@
-package com.example.nk.logtracer.config.v2_proxy.concrete_proxy;
+package com.example.nk.logtracer.config.v1_proxy.concrete_proxy;
 
 import com.example.nk.logtracer.app.proxy.v2.ProxyOrderRepositoryV2;
 import com.example.nk.logtracer.threadlocal.TraceStatus;
