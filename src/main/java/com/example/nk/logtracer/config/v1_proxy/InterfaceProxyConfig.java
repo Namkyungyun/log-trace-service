@@ -30,9 +30,4 @@ public class InterfaceProxyConfig {
         ProxyOrderRepositoryV1Impl impl = new ProxyOrderRepositoryV1Impl();
         return new OrderRepositoryInterfaceProxy(logTrace, impl);
     }
-
-    @Bean
-    LogTrace logTrace() {
-        return new LogTraceImpl();
-    }
 }

@@ -44,13 +44,5 @@ public class DynamicProxyBasicConfig {
                 handler);
 
         return (ProxyOrderControllerV1) proxy;
-
     }
-
-
-    @Bean
-    LogTrace logTrace() {
-        return new LogTraceImpl();
-    }
-
 }

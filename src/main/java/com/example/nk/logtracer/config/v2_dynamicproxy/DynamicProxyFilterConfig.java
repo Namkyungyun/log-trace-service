@@ -52,11 +52,4 @@ public class DynamicProxyFilterConfig {
         return (ProxyOrderControllerV1) proxy;
 
     }
-
-
-    @Bean
-    LogTrace logTrace() {
-        return new LogTraceImpl();
-    }
-
 }

@@ -31,11 +31,4 @@ public class ConcreteProxyConfig {
         final ProxyOrderControllerV2 proxyOrderControllerV2 = new ProxyOrderControllerV2(proxyOrderServiceV2(logTrace));
         return new OrderControllerConcreteProxy(proxyOrderControllerV2, logTrace);
     }
-
-
-    @Bean
-    LogTrace logTrace() {
-        return new LogTraceImpl();
-    }
-
 }
