@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Import;
 //@Import(ProxyFactoryConfig.class)
 //@Import(PostProcessorConfig.class)
 @Import(AutoProxyConfig.class)
-@SpringBootApplication(scanBasePackages = {"com.example.nk.logtracer.app.proxy.v3"})
+@SpringBootApplication(scanBasePackages = {"com.example.nk.logtracer.app.proxy"})
 public class LogTracerApplication {
 
     public static void main(String[] args) {

@@ -19,9 +19,12 @@ public class LogTraceAdvice implements MethodInterceptor {
         TraceStatus status = null;
         try {
             // 클래스 및 메서드명 가져오기
-            String methodName = invocation.getClass().getSimpleName()+ "." + invocation.getMethod().getName();
+            String className = invocation.getMethod().getDeclaringClass().getSimpleName();
+            String methodName = invocation.getMethod().getName();
 
-            status = logTrace.begin(methodName);
+            String message = className+ "." + methodName;
+
+            status = logTrace.begin(message);
             Object result = invocation.proceed();
             logTrace.end(status);
 
