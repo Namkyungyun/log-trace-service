@@ -12,12 +12,12 @@ public class OrderController {
     private final OrderService orderService;
 
     @RequestMapping(value="v3/request", method = RequestMethod.GET)
-    String request(@RequestParam String itemId) {
+    ResponseEntity<Object> request(@RequestParam String itemId) {
         orderService.orderItem(itemId);
 
         Object result = Map.of("result", "ok");
 
-        return "ok";
+        return ResponseEntity.ok(result);
     }
 
 }

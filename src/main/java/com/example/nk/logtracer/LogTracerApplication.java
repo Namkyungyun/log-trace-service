@@ -6,6 +6,7 @@ import com.example.nk.logtracer.config.v2_dynamicproxy.DynamicProxyFilterConfig;
 import com.example.nk.logtracer.config.v3_proxyfactory.ProxyFactoryConfig;
 import com.example.nk.logtracer.config.v4_postprocessor.PostProcessorConfig;
 import com.example.nk.logtracer.config.v5_autoproxy.AutoProxyConfig;
+import com.example.nk.logtracer.config.v6_aspect.AppConfig;
 import com.example.nk.logtracer.threadlocal.logtrace.LogTrace;
 import com.example.nk.logtracer.threadlocal.logtrace.LogTraceImpl;
 import org.springframework.boot.SpringApplication;
